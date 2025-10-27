@@ -1,18 +1,25 @@
+export const APP_ROUTES = {
+    COCKTAILS: 'cocktails',
+    ABOUT: 'about',
+    WORK: 'work',
+    CONTACT: 'contact',
+} as const;
+
 const NAV_LINKS = [
     {
-        id: "cocktails",
+        id: APP_ROUTES.COCKTAILS,
         title: "Cocktails",
     },
     {
-        id: "about",
+        id: APP_ROUTES.ABOUT,
         title: "About Us",
     },
     {
-        id: "work",
+        id: APP_ROUTES.WORK,
         title: "The Art",
     },
     {
-        id: "contact",
+        id: APP_ROUTES.CONTACT,
         title: "Contact",
     },
 ];

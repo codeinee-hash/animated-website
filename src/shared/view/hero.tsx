@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import {APP_ROUTES} from "@/shared/lib/constants";
 import {useGSAP} from "@gsap/react";
 import {SplitText} from "gsap/SplitText";
-import {useRef} from "react";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+import {useRef, useEffect} from "react";
 import {useResponsive} from "@/shared/hooks/use-responsive";
-import {gsap} from "gsap";
+import gsap from "gsap";
 
 export function Hero() {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -45,25 +45,26 @@ export function Hero() {
             })
             .to(".right-leaf", { y: 200 }, 0)
             .to(".left-leaf", { y: -200 }, 0)
-            // .to(".arrow", { y: 100 }, 0);
+            .to(".arrow", { y: 100 }, 0);
 
         const startValue = isMobile ? "top 50%" : "center 60%";
         const endValue = isMobile ? "120% top" : "bottom top";
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".video",
-                start: startValue,
-                end: endValue,
-                scrub: true,
-                pin: true,
-            },
-        });
-
         if (videoRef.current) {
             videoRef.current.onloadedmetadata = () => {
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ".video",
+                        start: startValue,
+                        end: endValue,
+                        scrub: true,
+                        pin: true,
+                    },
+                });
+
                 tl.to(videoRef.current, {
                     currentTime: videoRef.current?.duration,
+                    // ease: "none",
                 });
             };
         }
